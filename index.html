@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NO HEAVEN | NH Collection</title>
+  <meta name="description" content="NO HEAVEN Collection — luxury streetwear by Nathanel Hagani." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="nav">
+    <div class="brand"><span>NH</span><small>NO HEAVEN</small></div>
+    <nav>
+      <a href="#collection">Collection</a>
+      <a href="#lookbook">Lookbook</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="whatsapp small" href="https://wa.me/972XXXXXXXXX" target="_blank">WhatsApp</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="graffiti">NH</div>
+      <div class="angel" aria-hidden="true"></div>
+      <div class="hero-copy">
+        <p>NO HEAVEN COLLECTION</p>
+        <h1>NOT EVERYONE<br/>IS MEANT TO LAST.</h1>
+        <a class="btn" href="#collection">SHOP THE DROP</a>
+      </div>
+    </section>
+
+    <section class="strip">
+      <span>PREMIUM OVERSIZED FIT</span>
+      <span>LIMITED DROP</span>
+      <span>ORDER VIA WHATSAPP</span>
+    </section>
+
+    <section id="collection" class="section">
+      <div class="section-title">
+        <p>FIRST DROP</p>
+        <h2>COLLECTION</h2>
+      </div>
+      <div class="slider-wrap">
+        <button class="arrow left" onclick="scrollProducts(-1)">‹</button>
+        <div id="productSlider" class="products"></div>
+        <button class="arrow right" onclick="scrollProducts(1)">›</button>
+      </div>
+    </section>
+
+    <section id="lookbook" class="lookbook">
+      <div>
+        <p>LOOKBOOK</p>
+        <h2>NH WORLDWIDE</h2>
+        <a class="btn ghost" href="#collection">Explore Pieces</a>
+      </div>
+      <img src="assets/angel-black-outfit.jpg" alt="Black NH shirt" />
+      <img src="assets/pink-model-back.jpg" alt="Pink NH shirt" />
+      <img src="assets/black-pink-cap.jpg" alt="NH cap" />
+    </section>
+
+    <section id="about" class="about">
+      <div class="big-logo">NH</div>
+      <div>
+        <p>ABOUT THE BRAND</p>
+        <h2>MORE THAN JUST CLOTHING.</h2>
+        <p class="muted">No Heaven is a mindset. Built for people who move different, create their own path, and refuse average.</p>
+      </div>
+    </section>
+  </main>
+
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="close" onclick="closeModal()">×</button>
+      <img id="modalImg" src="" alt="" />
+      <div class="modal-info">
+        <p>NO HEAVEN COLLECTION</p>
+        <h3 id="modalTitle"></h3>
+        <strong id="modalPrice"></strong>
+        <div class="sizes" id="sizes"></div>
+        <a id="orderBtn" class="btn whatsapp" href="#" target="_blank">ORDER ON WHATSAPP</a>
+      </div>
+    </div>
+  </div>
+
+  <footer id="contact">
+    <div class="brand"><span>NH</span><small>NO HEAVEN</small></div>
+    <p>© NO HEAVEN 2026 · Designed by Nathanel Hagani™</p>
+  </footer>
+
+<script>
+const PRODUCTS = [{"slug": "black-ring-tee", "title": "Ring Tee Black", "price": "₪220", "img": "assets/black-ring-tee.jpg"}, {"slug": "white-pink-ring-tee", "title": "Ring Tee Pink", "price": "₪220", "img": "assets/white-pink-ring-tee.jpg"}, {"slug": "white-black-ring-tee", "title": "Ring Tee Mono", "price": "₪220", "img": "assets/white-black-ring-tee.jpg"}, {"slug": "front-white-black", "title": "Clean Logo Tee White", "price": "₪220", "img": "assets/front-white-black.jpg"}, {"slug": "front-white-pink", "title": "Clean Logo Tee Pink", "price": "₪220", "img": "assets/front-white-pink.jpg"}, {"slug": "front-black-white", "title": "Clean Logo Tee Black", "price": "₪220", "img": "assets/front-black-white.jpg"}, {"slug": "black-cap-white", "title": "NH Cap Black/White", "price": "₪120", "img": "assets/black-cap-white.jpg"}, {"slug": "grey-cap", "title": "NH Cap Grey", "price": "₪120", "img": "assets/grey-cap.jpg"}, {"slug": "white-cap", "title": "NH Cap White", "price": "₪120", "img": "assets/white-cap.jpg"}, {"slug": "black-pink-cap", "title": "NH Cap Black/Pink", "price": "₪120", "img": "assets/black-pink-cap.jpg"}, {"slug": "angel-black-outfit", "title": "Unbreakable Black Tee", "price": "₪220", "img": "assets/angel-black-outfit.jpg"}, {"slug": "angel-white-outfit", "title": "Unbreakable White Tee", "price": "₪220", "img": "assets/angel-white-outfit.jpg"}, {"slug": "pink-model-back", "title": "Pink Angel Tee", "price": "₪220", "img": "assets/pink-model-back.jpg"}, {"slug": "black-model-back", "title": "Black Angel Tee", "price": "₪220", "img": "assets/black-model-back.jpg"}];
+let selectedSize = 'M';
+const phone = '972XXXXXXXXX';
+function renderProducts() {
+  const el = document.getElementById('productSlider');
+  el.innerHTML = PRODUCTS.map((p,i)=>`
+    <article class="card" onclick="openProduct(${i})">
+      <div class="imgbox"><img src="${p.img}" alt="${p.title}"></div>
+      <h3>${p.title}</h3>
+      <p>${p.price}</p>
+    </article>`).join('');
+}
+function scrollProducts(dir) {
+  document.getElementById('productSlider').scrollBy({left: dir * 360, behavior:'smooth'});
+}
+function openProduct(i) {
+  const p = PRODUCTS[i];
+  selectedSize='M';
+  document.getElementById('modalImg').src=p.img;
+  document.getElementById('modalTitle').textContent=p.title;
+  document.getElementById('modalPrice').textContent=p.price;
+  document.getElementById('sizes').innerHTML=['S','M','L','XL','XXL'].map(s=>`<button class="${s==='M'?'active':''}" onclick="selectSize(this,'${s}')">${s}</button>`).join('');
+  updateOrder(p);
+  document.getElementById('modal').classList.add('open');
+}
+function selectSize(btn,s) {
+  selectedSize=s;
+  document.querySelectorAll('.sizes button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const title=document.getElementById('modalTitle').textContent;
+  const p=PRODUCTS.find(x=>x.title===title);
+  updateOrder(p);
+}
+function updateOrder(p) {
+  const msg = encodeURIComponent(`Hi NH, I want to order ${p.title} in size ${selectedSize}`);
+  document.getElementById('orderBtn').href = `https://wa.me/${phone}?text=${msg}`;
+}
+function closeModal() { document.getElementById('modal').classList.remove('open'); }
+renderProducts();
+</script>
+</body>
+</html>
